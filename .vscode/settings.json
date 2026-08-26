@@ -1,0 +1,4 @@
+{
+  // Suppress false-positive "Unknown at rule" errors for Tailwind directives
+  "css.lint.unknownAtRules": "ignore"
+}

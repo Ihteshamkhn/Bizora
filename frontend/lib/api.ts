@@ -63,7 +63,7 @@ export const api = {
       body: new URLSearchParams({ username: email, password }).toString(),
     }),
   createBusiness: (name: string, business_type?: string) =>
-    request<{ id: number; name: string }>("/api/businesses", {
+    request<{ id: number; name: string; business_type: string | null; currency: string }>("/api/businesses", {
       method: "POST", body: JSON.stringify({ name, business_type }),
     }),
   listBusinesses: () =>
