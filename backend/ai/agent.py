@@ -21,14 +21,12 @@ from ai.prompts import SYSTEM_PROMPT, TOOL_SELECTION_PROMPT
 from ai.tools import TOOL_REGISTRY
 from config import settings
 
-client = OpenAI(api_key=settings.GROQ_API_KEY,
-                base_url="https://api.groq.com/openai/v1")
-
-
 def _llm(messages: list[dict], temperature: float = 0.3) -> str:
     if not settings.GROQ_API_KEY:
         raise HTTPException(503,
                             "AI is not configured. Set GROQ_API_KEY in .env")
+    client = OpenAI(api_key=settings.GROQ_API_KEY,
+                    base_url="https://api.groq.com/openai/v1")
     resp = client.chat.completions.create(
         model=settings.GROQ_MODEL,
         messages=messages,

@@ -5,11 +5,13 @@ class Settings(BaseSettings):
     """Application settings loaded from environment / .env file."""
 
     APP_NAME: str = "Bizora AI Business Manager"
-    DEBUG: bool = True
+    DEBUG: bool = False
 
-    # Database (SQLite by default for zero-setup local dev;
-    # set DATABASE_URL in .env to postgresql+psycopg2://... in production)
+    # Database defaults; in production, set DATABASE_URL to a managed PostgreSQL URL.
     DATABASE_URL: str = "sqlite:///./bizora.db"
+
+    # CORS
+    ALLOWED_ORIGINS: str = "http://localhost:3000,https://localhost:3000"
 
     # Auth
     JWT_SECRET: str = "change-me-in-production"
@@ -26,6 +28,10 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         extra = "ignore"
+
+    @property
+    def allowed_origins(self) -> list[str]:
+        return [origin.strip() for origin in self.ALLOWED_ORIGINS.split(",") if origin.strip()]
 
 
 settings = Settings()

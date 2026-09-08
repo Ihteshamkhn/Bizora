@@ -60,9 +60,23 @@ frontend/
 └── lib/api.ts               # Typed API client
 ```
 
-## Quick start
+## Quick start for the business owner
 
-### 1. Database
+The easiest way is to run both services together from the project root.
+
+### Option 1: One-click startup on Windows
+
+```powershell
+./start-bizora.ps1
+```
+
+Then open:
+- Frontend: http://localhost:3000
+- API docs: http://localhost:8000/docs
+
+### Option 2: Manual startup
+
+#### 1. Database
 
 ```bash
 docker compose up db -d          # starts PostgreSQL on :5432
@@ -70,19 +84,19 @@ docker compose up db -d          # starts PostgreSQL on :5432
 
 (or point `DATABASE_URL` at any PostgreSQL instance)
 
-### 2. Backend
+#### 2. Backend
 
 ```bash
 cd backend
 python -m venv venv && venv\Scripts\activate     # Windows
 pip install -r requirements.txt
 copy ..\.env.example .env                        # then edit values
-uvicorn main:app --reload                        # http://localhost:8000
+uvicorn main:app --host 0.0.0.0 --port 8000      # http://localhost:8000
 ```
 
 API docs: http://localhost:8000/docs
 
-### 3. Frontend
+#### 3. Frontend
 
 ```bash
 cd frontend
