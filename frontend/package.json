@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\"",
     "dev": "next dev -H 0.0.0.0 -p 3000",
+    "prebuild": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\"",
     "build": "next build",
+    "prestart": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\"",
     "start": "next start -H 0.0.0.0 -p 3000"
   },
   "dependencies": {
